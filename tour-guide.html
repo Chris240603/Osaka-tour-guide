@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大阪自助旅行指南</title>
+    <link href="css/style.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/3.3.4/vue.global.prod.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <div class="container" :class="isDarkMode ? 'dark-mode' : 'light-mode'">
+            <header class="header">
+                <h1><i class="fas fa-torii-gate"></i> 大阪自助旅行指南</h1>
+                <p>探索關西美食與文化之旅</p>
+            </header>
+
+            <nav class="nav-tabs">
+                <button 
+                    v-for="tab in tabs" 
+                    :key="tab.id"
+                    @click="switchTab(tab.id)"
+                    :class="['nav-tab', { active: activeTab === tab.id }]"
+                >
+                    <i :class="tab.icon"></i> {{ tab.name }}
+                </button>
+            </nav>
+
+            <section v-show="activeTab === 'itinerary'" class="content-section" :class="{ active: activeTab === 'itinerary' }">
+                <div class="day-selector">
+                    <button 
+                        v-for="day in days" 
+                        :key="day"
+                        @click="switchDay(day)"
+                        :class="['day-btn', { active: selectedDay === day }]"
+                    >
+                        第{{ day }}天
+                    </button>
+                </div>
+
+                <div class="card-grid">
+                    <div 
+                        v-for="item in getItineraryByDay(selectedDay)" 
+                        :key="item.id"
+                        @click="toggleCard(item.id)"
+                        :class="['card', { expanded: expandedCards.includes(item.id) }]"
+                    >
+                        <div class="card-main">
+                            <h3><i class="fas fa-map-marker-alt"></i> {{ item.title }}</h3>
+                            <p class="card-summary">{{ item.summary }}</p>
+                        </div>
+                        <div class="card-content">
+                            <hr>
+                            <h4>詳細行程</h4>
+                            <p>{{ item.details }}</p>
+                            <h4>交通方式</h4>
+                            <p>{{ item.transport }}</p>
+                            <h4>預估時間</h4>
+                            <p>{{ item.duration }}</p>
+                            <h4>注意事項</h4>
+                            <p>{{ item.notes }}</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section v-show="activeTab === 'attractions'" class="content-section" :class="{ active: activeTab === 'attractions' }">
+                <div 
+                    v-for="attraction in attractions" 
+                    :key="attraction.id"
+                    class="place-item"
+                >
+                    <h4><i :class="attraction.icon"></i> {{ attraction.name }}</h4>
+                    <p>{{ attraction.description }}</p>
+                    <a :href="attraction.mapUrl" target="_blank">
+                        <i class="fas fa-map-marker-alt"></i> 查看 Google 地圖
+                    </a>
+                </div>
+            </section>
+
+            <section v-show="activeTab === 'restaurants'" class="content-section" :class="{ active: activeTab === 'restaurants' }">
+                <div 
+                    v-for="restaurant in restaurants" 
+                    :key="restaurant.id"
+                    class="place-item"
+                >
+                    <h4><i :class="restaurant.icon"></i> {{ restaurant.name }}</h4>
+                    <p>{{ restaurant.description }}</p>
+                    <a :href="restaurant.mapUrl" target="_blank">
+                        <i class="fas fa-map-marker-alt"></i> 查看 Google 地圖
+                    </a>
+                </div>
+            </section>
+
+            <section v-show="activeTab === 'hotels'" class="content-section" :class="{ active: activeTab === 'hotels' }">
+                <div 
+                    v-for="hotel in hotels" 
+                    :key="hotel.id"
+                    class="place-item"
+                >
+                    <h4><i :class="hotel.icon"></i> {{ hotel.name }}</h4>
+                    <p>{{ hotel.description }}</p>
+                    <a :href="hotel.mapUrl" target="_blank">
+                        <i class="fas fa-map-marker-alt"></i> 查看 Google 地圖
+                    </a>
+                </div>
+            </section>
+
+            <section v-show="activeTab === 'airlines'" class="content-section" :class="{ active: activeTab === 'airlines' }">
+                <div class="link-section">
+                    <h3><i class="fas fa-plane"></i> 航空公司</h3>
+                    <div class="link-list">
+                        <a 
+                            v-for="airline in airlines" 
+                            :key="airline.id"
+                            :href="airline.url" 
+                            target="_blank" 
+                            class="link-item"
+                        >
+                            {{ airline.name }}
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <section v-show="activeTab === 'links'" class="content-section" :class="{ active: activeTab === 'links' }">
+                <div 
+                    v-for="linkSection in linkSections" 
+                    :key="linkSection.id"
+                    class="link-section"
+                >
+                    <h3><i :class="linkSection.icon"></i> {{ linkSection.title }}</h3>
+                    <div class="link-list">
+                        <a 
+                            v-for="link in linkSection.links" 
+                            :key="link.id"
+                            :href="link.url" 
+                            target="_blank" 
+                            class="link-item"
+                        >
+                            {{ link.name }}
+                        </a>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <button @click="toggleMode" class="mode-toggle">
+            <i :class="isDarkMode ? 'fas fa-sun' : 'fas fa-moon'"></i>
+        </button>
+    </div>
+
+    <script src="js/tour-guide.js"></script>
+</body>
+</html>
