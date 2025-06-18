@@ -7,7 +7,7 @@ createApp({
             activeTab: 'itinerary',
             selectedDay: 1,
             expandedCards: [],
-            days: [1, 2, 3, 4, 5],
+            days: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13],
             tabs: [
                 { id: 'itinerary', name: '主要規劃行程', icon: 'fas fa-calendar-alt' },
                 { id: 'attractions', name: '參考景點', icon: 'fas fa-camera' },
@@ -18,8 +18,32 @@ createApp({
             ],
             attractions: [],
             restaurants: [],
-            hotels: [],
-            airlines: [],
+            hotels: [
+                {
+                    id: 'hotel-1',
+                    name: '環球影城園前飯店',
+                    description: '優越的地理位置讓您輕鬆直達主題樂園以及周邊步行街。只需一分鐘便能抵達日本環球影城正門，與著名的環球雕塑打卡合影，然後通過宏偉的拱門大門，享受一整天不間斷的精彩與刺激。「園前」意味著更多的時間玩轉日本環球影城，在大阪留下更多回憶。',
+                    icon: 'fas fa-bed',
+                    mapUrl: 'https://maps.google.com/maps?q=日本環球影城園前飯店'
+                }
+            ],
+            airlines: [
+                {
+                    id: 'airline-1',
+                    name: '中華航空',
+                    url: 'https://www.china-airlines.com/tw/zh'
+                },
+                {
+                    id: 'airline-2',
+                    name: '星宇航空',
+                    url: 'https://www.starlux-airlines.com/zh-TW'
+                },
+                {
+                    id: 'airline-3',
+                    name: '長榮航空',
+                    url: 'https://www.evaair.com/zh-tw/index.html'
+                }
+            ],
             linkSections: [
                 {
                     id: 'transport',
@@ -29,9 +53,20 @@ createApp({
                 },
                 {
                     id: 'tickets',
-                    title: '樂園、展覽門票',
+                    title: '樂園、展覽資訊',
                     icon: 'fas fa-ticket-alt',
-                    links: []
+                    links: [
+                        {
+                            id: 'link-1',
+                            name: '大阪・関西万博',
+                            url: 'https://www.expo2025.or.jp.t.att.hp.transer.com/'
+                        },
+                        {
+                            id: 'link-2',
+                            name: '環球影城',
+                            url: 'https://www.usj.co.jp/web/zh/tw'
+                        }
+                    ]
                 },
                 {
                     id: 'tourism',
