@@ -22,11 +22,10 @@ createApp({
                 {
                     id: 'hotel-1',
                     name: '環球影城園前飯店',
-                    description: '優越的地理位置讓您輕鬆直達主題樂園以及周邊步行街。只需一分鐘便能抵達日本環球影城正門，與著名的環球雕塑打卡合影，然後通過宏偉的拱門大門，享受一整天不間斷的精彩與刺激。「園前」意味著更多的時間玩轉日本環球影城，在大阪留下更多回憶。',
+                    description: '優越的地理位置，步行一分鐘即可抵達日本環球影城正門，方便打卡環球雕塑並享受樂園的精彩體驗，同時輕鬆探索周邊步行街，讓您在大阪創造更多難忘回憶。',
                     icon: 'fas fa-bed',
                     mapUrl: 'https://maps.google.com/maps?q=日本環球影城園前飯店'
-                }
-            ],
+                }],
             airlines: [
                 {
                     id: 'airline-1',
@@ -49,7 +48,13 @@ createApp({
                     id: 'transport',
                     title: '交通資訊',
                     icon: 'fas fa-train',
-                    links: []
+                    links: [
+                        {
+                            id: 'link-1',
+                            name: '乗換案内',
+                            url: 'https://world.jorudan.co.jp/mln/zh-tw/'
+                        }
+                    ]
                 },
                 {
                     id: 'tickets',
@@ -57,12 +62,12 @@ createApp({
                     icon: 'fas fa-ticket-alt',
                     links: [
                         {
-                            id: 'link-1',
+                            id: 'link-2',
                             name: '大阪・関西万博',
                             url: 'https://www.expo2025.or.jp.t.att.hp.transer.com/'
                         },
                         {
-                            id: 'link-2',
+                            id: 'link-3',
                             name: '環球影城',
                             url: 'https://www.usj.co.jp/web/zh/tw'
                         }
